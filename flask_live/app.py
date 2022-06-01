@@ -19,7 +19,7 @@ def video():
     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__== "__main__":
-    jsn={'detected': False,'pred':{}}
+    jsn={"detected": False, "pred": {"angry": 0, "confident": 0, "confused": 0, "contempt": 0, "crying": 0, "disgust": 0, "fear": 0, "happy": 0, "neutral": 0, "sad": 0, "shy": 0, "sleepy": 0, "surprised": 0}}
     with open('static/result/result.json', 'w') as f:
         json.dump(jsn, f)
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=5000,debug=True)

@@ -1,8 +1,9 @@
 const path = window.location.href;
 const predictions = document.getElementById("predictions").children;
 const img = document.getElementById("image");
+const route = window.location.href;
+const results = `${route}/static/result/result.json`;
 
-const results = "http://127.0.0.1:5000/static/result/result.json";
 const EMOTIONS = [
   "angry",
   "confident",
@@ -38,9 +39,11 @@ async function HandleResponse(response) {
 function displayData(pred) {
   for (let i = 0; i < predictions.length; i++) {
     const percentage = Math.floor(pred[EMOTIONS[i]] * 100);
-    predictions[i].children[0].style.width =
-      (percentage * 0.8).toString() + "%";
-    predictions[i].children[0].style.backgroundColor = getcolor(percentage);
+    predictions[i].children[1].innerText = percentage.toString() + "%";
+    predictions[i].children[2].children[0].style.width =
+      (percentage * 0.75).toString() + "%";
+    predictions[i].children[2].children[0].style.backgroundColor =
+      getcolor(percentage);
   }
 }
 

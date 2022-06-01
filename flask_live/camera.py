@@ -35,7 +35,7 @@ class Video(object):
         faces = face_detection.detectMultiScale(gray,scaleFactor=1.1,minNeighbors=5,minSize=(30,30),flags=cv2.CASCADE_SCALE_IMAGE)
         canvas = np.zeros((450, 500, 3), dtype="uint8")
         frameClone = frame.copy()
-        jsn={'detected': False,'pred':{}}
+        jsn={"detected": False, "pred": {"angry": 0, "confident": 0, "confused": 0, "contempt": 0, "crying": 0, "disgust": 0, "fear": 0, "happy": 0, "neutral": 0, "sad": 0, "shy": 0, "sleepy": 0, "surprised": 0}}
         
         if len(faces)>0 :
 
@@ -58,7 +58,7 @@ class Video(object):
             
             for (i, (emotion, prob)) in enumerate(zip(EMOTIONS, preds)):
                 
-                text = "{}: {:.2f}%".format(emotion, prob * 100)
+              
 
                 w = int(prob * 300)
                 cv2.putText(frameClone, label, (fX, fY - 10),
