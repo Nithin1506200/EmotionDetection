@@ -1,3 +1,6 @@
+from urllib.request import url2pathname
+
+from flask import url_for
 import imutils
 import cv2
 from keras.models import load_model
@@ -5,7 +8,7 @@ import numpy as np
 import argparse
 import matplotlib.pyplot as plt
 from tensorflow.keras.utils import img_to_array
-
+import json
 
 detection_model_path = '../Models/haarcascade_frontalface_default.xml'
 #emotion_model_path = 'models/new'
@@ -32,6 +35,7 @@ class Video(object):
         faces = face_detection.detectMultiScale(gray,scaleFactor=1.1,minNeighbors=5,minSize=(30,30),flags=cv2.CASCADE_SCALE_IMAGE)
         canvas = np.zeros((450, 500, 3), dtype="uint8")
         frameClone = frame.copy()
+        jsn={'detected': False,'pred':{}}
         
         if len(faces)>0 :
 
@@ -47,6 +51,11 @@ class Video(object):
             preds = emotion_classifier.predict(roi)[0]
             emotion_probability = np.max(preds)
             label = EMOTIONS[preds.argmax()]
+            #print(preds)
+            jsn['detected']=True
+            for i,value in enumerate(EMOTIONS):
+                jsn['pred'][value]=eval(str(preds[i]))
+            
             for (i, (emotion, prob)) in enumerate(zip(EMOTIONS, preds)):
                 
                 text = "{}: {:.2f}%".format(emotion, prob * 100)
@@ -56,6 +65,8 @@ class Video(object):
                 cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
                 cv2.rectangle(frameClone, (fX, fY), (fX + fW, fY + fH),
                               (0, 0, 255), 2)
+        with open('static/result/result.json', 'w') as f:
+            json.dump(jsn, f)
 
         ret,jpg=cv2.imencode('.jpg',frameClone)
-        return [jpg.tobytes(),preds]
+        return jpg.tobytes()

@@ -1,4 +1,23 @@
 {% extends 'base.html'%} {% block content %}
 <h1>from index</h1>
-<img src="{{ url_for('video') }}" alt="" />
+<img id="image" src="{{ url_for('video') }}" alt="" />
+<div id="pred">
+  <h1>Results</h1>
+  <div id="predictions">
+    <div>angry<span></span></div>
+    <div>confident<span></span></div>
+    <div>confused<span></span></div>
+    <div>contempt<span></span></div>
+    <div>crying<span></span></div>
+    <div>disgust<span></span></div>
+    <div>fear<span></span></div>
+    <div>happy<span></span></div>
+    <div>neutral<span></span></div>
+    <div>sad<span></span></div>
+    <div>shy<span></span></div>
+    <div>sleepy<span></span></div>
+    <div>surprised<span></span></div>
+  </div>
+</div>
+<script src="{{url_for('static',filename='js/index.js')}}"></script>
 {% endblock %}
