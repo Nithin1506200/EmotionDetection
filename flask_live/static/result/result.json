@@ -1,1 +1,1 @@
-{"detected": true, "pred": {"angry": 0.24607912, "confident": 3.5031105e-06, "confused": 1.21521e-05, "contempt": 7.958164e-06, "crying": 0.0020594068, "disgust": 1.5175196e-05, "fear": 0.27500847, "happy": 0.0005479366, "neutral": 0.38031802, "sad": 0.08263828, "shy": 4.6602156e-05, "sleepy": 9.669359e-05, "surprised": 0.0131667545}}
+{"detected": false, "pred": {"angry": 0, "confident": 0, "confused": 0, "contempt": 0, "crying": 0, "disgust": 0, "fear": 0, "happy": 0, "neutral": 0, "sad": 0, "shy": 0, "sleepy": 0, "surprised": 0}}

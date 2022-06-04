@@ -61,4 +61,4 @@ function getcolor(value) {
     return "black";
   }
 }
-setInterval(GetData, 200);
+setInterval(GetData, 500);
