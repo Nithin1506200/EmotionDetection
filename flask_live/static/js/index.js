@@ -1,6 +1,6 @@
 const path = window.location.href;
 const predictions = document.getElementById("predictions").children;
-const img = document.getElementById("image");
+const img = document.getElementById("imagelive");
 const route = window.location.href;
 const results = `${route}/static/result/result.json`;
 
@@ -30,10 +30,13 @@ async function GetData() {
 async function HandleResponse(response) {
   const data = await response.json();
   if (data["detected"] === true) {
-    img.style.borderColor = "green";
+    img.style.backgroundColor = "chartreuse";
+
+    // img.classList.add("detected");
     displayData(data["pred"]);
   } else {
-    img.style.borderColor = "red";
+    img.style.backgroundColor = "red";
+    // img.classList.remove("detected");
   }
 }
 function displayData(pred) {
@@ -41,7 +44,7 @@ function displayData(pred) {
     const percentage = Math.floor(pred[EMOTIONS[i]] * 100);
     predictions[i].children[1].innerText = percentage.toString() + "%";
     predictions[i].children[2].children[0].style.width =
-      (percentage * 0.75).toString() + "%";
+      percentage.toString() + "%";
     predictions[i].children[2].children[0].style.backgroundColor =
       getcolor(percentage);
   }
